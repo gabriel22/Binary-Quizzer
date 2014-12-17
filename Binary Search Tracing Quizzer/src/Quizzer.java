@@ -9,14 +9,19 @@ public class Quizzer
 	{
 	static ArrayList myArray = new ArrayList();
 	static int number=0;
+	static Scanner guess = new Scanner(System.in);
 	static int target;
 	static int targetNumber = 0;
+	static int counter =0;
+	static int total;
+	static int pass;
 
 
 	public static void main(String[] args)
 		{
 		fillArray();
 		getTarget();
+		quiz();
 		}
 	
 	public static void fillArray()
@@ -55,29 +60,97 @@ public class Quizzer
 		System.out.println("The target is " + target);
 		}
 	
-	public static int binarySearch(int[] elements, int target)
-		{
-		int left = 0;
-		int right = elements.length - 1;
-		
-			int middle = (left + right)/2;
-			if(target <elements[middle])
-				{
-				right = middle - 1;
-				}
-			else if(target > elements[middle])
-				{
-				left = middle + 1;
-				}
-			else
-				{
-				return middle;
-				}	
-		}
-	
-	public static void correctRight()
-		{
-		
-		}
+	 public static void quiz()
+	 {
+	 	int left = 0; 
+	 	int right = myArray.size() -1;
+	 	
+	 	while(left <= right) 
+	 		{ 
+	 		int middle = (left +  right)/2; 
+	 		System.out.println("What is the left position?"); 
+	 		int inputLeft = guess.nextInt(); 
+	 		if(inputLeft == left) 
+	 		{ 
+	 		System.out.println("Great! That is correct!"); 
+	 		counter ++; 
+	 		total ++; 
+	 		} 
+	 		else 
+	 			{ 
+	 			System.out.println("Incorrectt, the left is  " + left + "."); 
+	 			total ++; 
+	 			} 
+	 		 
+	 		System.out.println("What is the right position?"); 
+	 		int inputRight = guess.nextInt(); 
+	 		if(inputRight == right) 
+	 		{ 
+	 		System.out.println("Great! That is correct!"); 
+	 		counter ++; 
+	 		total ++; 
+	 		} 
+	 		else 
+	 			{ 
+	 			System.out.println("Incorrect, the right is " + right + "."); 
+	 			total ++; 
+				} 
+	 
+	 
+	 		System.out.println("What is the middle position?"); 
+	 		int inputMiddle = guess.nextInt(); 
+	 		if(inputMiddle == middle) 
+	 		{ 
+	 		System.out.println("Great! That is correct!"); 
+			counter ++; 
+	 		total ++; 
+	 		} 
+	 		else 
+	 			{ 
+	 			System.out.println("Incorrect, the middle is " + middle + "."); 
+	 			total ++; 
+	 			} 
+	 		 
+	 		System.out.println("What is the int at the middle position?"); 
+	 		int inputMiddleValue = guess.nextInt(); 
+	 		if(inputMiddleValue == (int) myArray.get(middle)) 
+	 		{ 
+	 		System.out.println("Great! That is correct!"); 
+	 		counter ++; 
+	 		total ++; 
+			} 
+	 		else 
+	 			{ 
+	 			System.out.println("Incorrect, the middle value is " + myArray.get(middle) + "."); 
+	 			total ++; 
+	 			} 
+	 		 
+	 		 
+	 		if(target < (int) myArray.get(middle)) 
+	 			{ 
+	 			right = middle - 1; 
+	 			pass++; 
+	 			System.out.println("This is the end of pass " + pass + "."); 
+	 			System.out.println(); 
+	 			} 
+	 		else if(target > (int) myArray.get(middle)) 
+	 			{ 
+	 			left = middle + 1; 
+	 			pass++; 
+	 			System.out.println("This is the end of pass " + pass + "."); 
+	 			System.out.println(); 
+	 			} 
+	 		else 
+	 			{ 
+	 			System.out.println(middle); 
+	 			System.out.println("Your score is " + counter + " out of " + total +  " points from this quizzer!"); 
+			break; 
+	 			} 
+	 
+	 
+	 		}
+
 
 	}
+}
+
